@@ -1,0 +1,82 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+	<!-- search area -->
+	<div class="search-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="close-btn"><i class="fas fa-window-close"></i></span>
+					<div class="search-bar">
+						<div class="search-bar-tablecell">
+							<h3>Search For:</h3>
+							<input type="text" placeholder="Keywords">
+							<button type="submit">Search <i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end search arewa -->
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Fresh and Organic</p>
+						<h1>WishList</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- products -->
+	<div class="product-section mt-150 mb-150">
+		<div class="container">
+			
+
+			<div class="row product-lists">
+				{% if wishlists %}
+                {% for i in wishlists %}
+				<div class="col-lg-4 col-md-6 text-center">
+					<div class="single-product-item">
+						<div class="product-image">
+							<a href="{% url 'product-details' pk=i.product.pk %}">
+								{% if i.product.product_image %}
+								<img src="{{i.product.product_image.url}}"
+									style="width: 700px; height: 400px;"
+									alt="{{ i.product_name }}">
+								{% else %}
+								<img src="{% static 'img/no-image.png' %}"
+									style="width: 700px; height: 400px;"
+									alt="No image">
+								{% endif %}
+							</a>
+						</div>
+						<h3>{{i.product.product_name}}</h3>
+						<p class="product-price"><span>Per Kg</span>{{i.product.product_price}} RS</p>					
+					</div>
+				</div>
+				{% endfor %}
+                {% else %}
+                <h1>No Products In Wishlist</h1>
+                {% endif %}
+			</div>
+		</div>
+	</div>
+	<!-- end products -->
+
+</body>
+</html>
+{% endblock %}

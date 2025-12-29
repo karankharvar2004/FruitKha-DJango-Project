@@ -1,0 +1,204 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+	<!-- search area -->
+	<div class="search-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="close-btn"><i class="fas fa-window-close"></i></span>
+					<div class="search-bar">
+						<div class="search-bar-tablecell">
+							<h3>Search For:</h3>
+							<input type="text" placeholder="Keywords">
+							<button type="submit">Search <i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end search arewa -->
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>See more Details</p>
+						<h1>Product Details</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- single product -->
+	<div class="single-product mt-150">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-5">
+					<div class="single-product-img">
+						<img src="{{product.product_image.url}}" alt="">
+					</div>
+				</div>
+				<div class="col-md-7">
+					<div class="single-product-content">
+						<h3>{{product.product_name}}</h3>
+						<p class="single-product-pricing"><span>Per Kg</span>{{product.product_price}} RS</p>
+						<p>{{product.product_desc}}</p>
+						<div class="single-product-form">
+							<p><strong>Categories: </strong>Fruits, {{product.product_category}}</p>
+						</div>
+                        <div class="card_area" style="margin-top: 25px;">
+                            {% if request.session.email %}
+                            {% if cart_flag == False %}
+                            <a href="{% url 'add-to-cart' pk=product.pk %}"
+                            style="
+                                    display: inline-block;
+                                    padding: 10px 24px;
+                                    margin-right: 10px;
+                                    background: linear-gradient(135deg, #3498db, #2980b9);
+                                    color: #ffffff;
+                                    text-decoration: none;
+                                    border-radius: 30px;
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    letter-spacing: 0.4px;
+                                    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+                                    transition: all 0.3s ease;
+                            "
+                            onmouseover="
+                                    this.style.transform='translateY(-3px)';
+                                    this.style.boxShadow='0 12px 25px rgba(0,0,0,0.4)';
+                            "
+                            onmouseout="
+                                    this.style.transform='translateY(0)';
+                                    this.style.boxShadow='0 6px 15px rgba(0,0,0,0.25)';
+                            ">
+                            Add to Cart
+                            </a>
+                            {% else %}
+                            <a href="{% url 'remove-from-cart' pk=product.pk %}"
+                            style="
+                                    display: inline-block;
+                                    padding: 10px 24px;
+                                    margin-right: 10px;
+                                    background: linear-gradient(135deg, #3498db, #2980b9);
+                                    color: #ffffff;
+                                    text-decoration: none;
+                                    border-radius: 30px;
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    letter-spacing: 0.4px;
+                                    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+                                    transition: all 0.3s ease;
+                            "
+                            onmouseover="
+                                    this.style.transform='translateY(-3px)';
+                                    this.style.boxShadow='0 12px 25px rgba(0,0,0,0.4)';
+                            "
+                            onmouseout="
+                                    this.style.transform='translateY(0)';
+                                    this.style.boxShadow='0 6px 15px rgba(0,0,0,0.25)';
+                            ">
+                            Remove from Cart
+                            </a>
+                            {% endif %}
+                            {% if wishlist_flag == False %}
+                            <a href="{% url 'add-to-wishlist' pk=product.pk %}"
+                            style="
+                                    display: inline-block;
+                                    padding: 10px 24px;
+                                    background: linear-gradient(135deg, #e74c3c, #c0392b);
+                                    color: #ffffff;
+                                    text-decoration: none;
+                                    border-radius: 30px;
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    letter-spacing: 0.4px;
+                                    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+                                    transition: all 0.3s ease;
+                            "
+                            onmouseover="
+                                    this.style.transform='translateY(-3px)';
+                                    this.style.boxShadow='0 12px 25px rgba(0,0,0,0.4)';
+                            "
+                            onmouseout="
+                                    this.style.transform='translateY(0)';
+                                    this.style.boxShadow='0 6px 15px rgba(0,0,0,0.25)';
+                            ">
+                            Add to Wishlist
+                            </a>
+                            {% else %}
+                            <a href="{% url 'remove-from-wishlist' pk=product.pk %}"
+                            style="
+                                    display: inline-block;
+                                    padding: 10px 24px;
+                                    background: linear-gradient(135deg, #e74c3c, #c0392b);
+                                    color: #ffffff;
+                                    text-decoration: none;
+                                    border-radius: 30px;
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    letter-spacing: 0.4px;
+                                    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+                                    transition: all 0.3s ease;
+                            "
+                            onmouseover="
+                                    this.style.transform='translateY(-3px)';
+                                    this.style.boxShadow='0 12px 25px rgba(0,0,0,0.4)';
+                            "
+                            onmouseout="
+                                    this.style.transform='translateY(0)';
+                                    this.style.boxShadow='0 6px 15px rgba(0,0,0,0.25)';
+                            ">
+                            Remove From Wishlist
+                            </a>
+                            {% endif %}
+                            {% else %}
+                            <a href="{% url 'login' pk=product.pk %}"
+                            style="
+                                    display: inline-block;
+                                    padding: 10px 24px;
+                                    background: linear-gradient(135deg, #e74c3c, #c0392b);
+                                    color: #ffffff;
+                                    text-decoration: none;
+                                    border-radius: 30px;
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    letter-spacing: 0.4px;
+                                    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+                                    transition: all 0.3s ease;
+                            "
+                            onmouseover="
+                                    this.style.transform='translateY(-3px)';
+                                    this.style.boxShadow='0 12px 25px rgba(0,0,0,0.4)';
+                            "
+                            onmouseout="
+                                    this.style.transform='translateY(0)';
+                                    this.style.boxShadow='0 6px 15px rgba(0,0,0,0.25)';
+                            ">
+                            Login
+                            </a>
+                            {% endif %}
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end single product -->
+
+
+</body>
+</html>
+{% endblock %}

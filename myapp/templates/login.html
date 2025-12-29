@@ -1,0 +1,143 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+	<!-- search area -->
+	<div class="search-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="close-btn"><i class="fas fa-window-close"></i></span>
+					<div class="search-bar">
+						<div class="search-bar-tablecell">
+							<h3>Search For:</h3>
+							<input type="text" placeholder="Keywords">
+							<button type="submit">Search <i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end search arewa -->
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p style="
+                        font-family: cursive;
+                        font-style: italic;">Start Your Expenditure</p>
+						<h1 style="
+                        font-family: 'Dancing Script', cursive;
+                        font-weight: 700;
+                        letter-spacing: 1px;
+                    ">Login</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- contact form -->
+	<div class="contact-from-section" style="
+                background-image: url('https://images.pexels.com/photos/5677910/pexels-photo-5677910.jpeg?auto=compress&cs=tinysrgb&w=1600');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                height: 100%;
+            ">>
+			<div class="contact-form">
+                {% if msg %}
+                <div class="alert alert-warning text-center d-inline-block px-4 py-2 rounded-pill"
+                    style="
+                        color: #00eaffff;
+                        font-weight: 500;
+                        letter-spacing: 0.4px;
+                        font-size: 14px;
+                        background-color: #0008ffff;
+                        border: 1px solid #00eaffff;
+                        box-shadow: 0 3px 8px rgba(0,0,0,0.5);
+                        animation: fadeOut 4s forwards;
+                        margin-left: 650px;
+                    ">
+                    {{ msg }}
+                </div>
+                {% endif %}
+						<form action="{% url 'login' %}" method="post" id="contactForm"
+                            enctype="multipart/form-data"
+                            class="p-4 p-md-5 shadow-lg rounded-4"
+                            style="background: rgba(255,255,255,0.75); max-width:600px; margin: 200px auto;">
+
+                            {% csrf_token %}
+
+                            <h3 class="text-center fw-bold mb-4">Login With Us</h3>
+
+                            <div class="mb-3">
+                                <input type="email"
+                                    class="form-control form-control-lg"
+                                    name="email"
+                                    placeholder="Email Address"
+                                    required>
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="password"
+                                    class="form-control form-control-lg"
+                                    name="password"
+                                    placeholder="Password"
+                                    required>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit"
+                                        class="btn btn-lg rounded-pill text-white"
+                                        style="
+                                            background: linear-gradient(135deg, #000000, #434343);
+                                            transition: all 0.3s ease;
+                                            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+                                            font-weight: 600;
+                                            letter-spacing: 0.5px;
+                                        "
+                                        onmouseover="
+                                            this.style.transform='translateY(-3px)';
+                                            this.style.boxShadow='0 12px 28px rgba(0,0,0,0.45)';
+                                        "
+                                        onmouseout="
+                                            this.style.transform='translateY(0)';
+                                            this.style.boxShadow='0 6px 15px rgba(0,0,0,0.3)';
+                                        ">
+                                    🚀 Login
+                                </button>
+                                <a class="btn" 
+                                    style="
+                                            margin-left: 10px;
+                                            color: black;
+                                            transition: all 0.3s ease;
+                                            text-decoration: none;
+                                        "
+                                        onmouseover="
+                                            this.style.color='maroon';
+                                        "
+                                        onmouseout="
+                                            this.style.color='black';
+                                        "
+                                 href="{% url 'forgot-password' %}">Forgot Password</a>
+                            </div>
+                        </form>
+					</div>
+	</div>
+	<!-- end contact form -->
+	
+</body>
+</html>
+{% endblock %}

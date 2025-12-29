@@ -1,0 +1,92 @@
+{% extends "header.html" %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<body>
+
+	<!-- search area -->
+	<div class="search-area">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<span class="close-btn"><i class="fas fa-window-close"></i></span>
+					<div class="search-bar">
+						<div class="search-bar-tablecell">
+							<h3>Search For:</h3>
+							<input type="text" placeholder="Keywords">
+							<button type="submit">Search <i class="fas fa-search"></i></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end search arewa -->
+	
+	<!-- breadcrumb-section -->
+	<div class="breadcrumb-section breadcrumb-bg">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-8 offset-lg-2 text-center">
+					<div class="breadcrumb-text">
+						<p>Organic Information</p>
+						<h1>News Article</h1>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- end breadcrumb section -->
+
+	<!-- latest news -->
+	<div class="latest-news mt-150 mb-150">
+		<div class="container">
+			<div class="row">
+            {% for i in news %}
+            <div class="col-lg-4 col-md-6 col-sm-12 mb-4">
+                <div class="single-latest-news h-100">
+                    
+                    <a href="#">
+                        {% if i.news_image %}
+                        <div class="latest-news-bg"
+                            style="background-image: url('{{ i.news_image.url }}');">
+                        </div>
+                        {% else %}
+                        <div class="latest-news-bg"
+                            style="background-image: url('{% static "img/no-image.png" %}');">
+                        </div>
+                        {% endif %}
+                    </a>
+
+                    <div class="news-text-box">
+                        <h3>{{ i.news_title }}</h3>
+
+                        <p class="blog-meta">
+                            <span class="author">
+                                <i class="fas fa-user"></i> Admin
+                            </span>
+                            <span class="date">
+                                <i class="fas fa-calendar"></i> {{ i.news_date }}
+                            </span>
+                        </p>
+
+                        <p class="excerpt">
+                            {{ i.news_desc|truncatewords:20 }}
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+		</div>
+	</div>
+	<!-- end latest news -->
+
+
+</body>
+</html>
+{% endblock %}

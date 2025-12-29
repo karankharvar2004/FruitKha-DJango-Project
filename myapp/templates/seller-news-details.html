@@ -1,0 +1,110 @@
+{% extends "seller-header.html" %}
+{% load static %}
+{% block content %}
+
+<!-- breadcrumb-section -->
+<div class="breadcrumb-section breadcrumb-bg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2 text-center">
+                <div class="breadcrumb-text">
+                    <p>Read the Details</p>
+                    <h1>{{ news.news_title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end breadcrumb section -->
+
+<!-- single article section -->
+<div class="mt-150 mb-150">
+    <div class="container">
+        <div class="row">
+
+            <!-- News Image -->
+            <div class="col-lg-6">
+                <div class="single-product-img" style="height: 400px; width: 300px; margin-left: 200px;">
+                    {% if news.news_image %}
+                        <img src="{{ news.news_image.url }}" alt="{{ news.news_title }}">
+                    {% else %}
+                        <img src="{% static 'img/no-image.png' %}" alt="No Image">
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- News Content -->
+            <div class="col-lg-6">
+                <div class="single-article-section" style="margin-right: 200px;">
+                    <div class="single-article-text">
+                        <p class="blog-meta">
+                            <span class="date">
+                                <i class="fas fa-calendar"></i>
+                                {{ news.news_date }}
+                            </span>
+                        </p>
+
+                        <h3>{{ news.news_title }}</h3>
+                        <p>{{ news.news_desc }}</p>
+                    </div>
+                    <div class="card_area" style="margin-top: 25px;">
+                            <a href="{% url 'seller-news-edit' pk=news.pk %}"
+                            style="
+                                    display: inline-block;
+                                    padding: 10px 24px;
+                                    margin-right: 10px;
+                                    background: linear-gradient(135deg, #3498db, #2980b9);
+                                    color: #ffffff;
+                                    text-decoration: none;
+                                    border-radius: 30px;
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    letter-spacing: 0.4px;
+                                    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+                                    transition: all 0.3s ease;
+                            "
+                            onmouseover="
+                                    this.style.transform='translateY(-3px)';
+                                    this.style.boxShadow='0 12px 25px rgba(0,0,0,0.4)';
+                            "
+                            onmouseout="
+                                    this.style.transform='translateY(0)';
+                                    this.style.boxShadow='0 6px 15px rgba(0,0,0,0.25)';
+                            ">
+                            ✏️ Edit
+                            </a>
+
+                            <a href="{% url 'seller-news-delete' pk=news.pk %}"
+                            style="
+                                    display: inline-block;
+                                    padding: 10px 24px;
+                                    background: linear-gradient(135deg, #e74c3c, #c0392b);
+                                    color: #ffffff;
+                                    text-decoration: none;
+                                    border-radius: 30px;
+                                    font-size: 14px;
+                                    font-weight: 600;
+                                    letter-spacing: 0.4px;
+                                    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+                                    transition: all 0.3s ease;
+                            "
+                            onmouseover="
+                                    this.style.transform='translateY(-3px)';
+                                    this.style.boxShadow='0 12px 25px rgba(0,0,0,0.4)';
+                            "
+                            onmouseout="
+                                    this.style.transform='translateY(0)';
+                                    this.style.boxShadow='0 6px 15px rgba(0,0,0,0.25)';
+                            "
+                            onclick="return confirm('Are you sure you want to delete this product?');">
+                            🗑️ Delete
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+<!-- end single article section -->
+
+{% endblock %}
