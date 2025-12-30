@@ -124,6 +124,9 @@ def logout(request):
         return render(request,'login.html',{'msg':msg})
     
 def profile(request):
+    if 'email' not in request.session:
+        return redirect('login')
+    
     user=User.objects.get(email=request.session['email'])
     if request.method=="POST":
         user.fname=request.POST['fname']
@@ -264,9 +267,21 @@ def add_product(request):
     return render(request, 'add-product.html')
     
 def view_product(request):
-    seller=User.objects.get(email=request.session['email'])
-    products=Product.objects.filter(seller=seller)
-    return render(request,'view-product.html',{'products':products})
+    seller = User.objects.get(email=request.session['email'])
+    selected_category = request.GET.get('category')
+
+    products = Product.objects.filter(seller=seller)
+
+    if selected_category:
+        products = products.filter(
+            product_category__iexact=selected_category
+        )
+
+    return render(request, 'view-product.html', {
+        'products': products,
+        'selected_category': selected_category
+    })
+
 
 def seller_profile(request):
     user=User.objects.get(email=request.session['email'])
@@ -318,17 +333,20 @@ def seller_product_delete(request,pk):
     return redirect('view-product')
 
 def category(request):
-    category = request.GET.get('category')
+    selected_category = request.GET.get('category')
 
-    if category:
-        products = Product.objects.filter(product_category=category)
-    else:
-        products = Product.objects.all()
+    products = Product.objects.all()
+
+    if selected_category:
+        products = products.filter(
+            product_category__iexact=selected_category
+        )
 
     return render(request, 'category.html', {
         'products': products,
-        'selected_category': category
+        'selected_category': selected_category
     })
+
 
 def news(request):
     all_news = News.objects.all().order_by('-news_date')

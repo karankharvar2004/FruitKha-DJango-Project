@@ -51,7 +51,6 @@
 						<table class="cart-table">
 							<thead class="cart-table-head">
 								<tr class="table-head-row">
-									<th class="product-remove"></th>
 									<th class="product-image">Product Image</th>
 									<th class="product-name">Name</th>
 									<th class="product-price">Price</th>
@@ -62,7 +61,6 @@
 							<tbody>
 								{% for i in carts %}
 								<tr class="table-body-row">
-									{% comment %} <td class="product-remove"><a href="#"><i class="far fa-window-close"></i></a></td> {% endcomment %}
 									<td class="product-image"><img src="{{i.product.product_image.url}}" alt=""></td>
 									<td class="product-name">{{i.product.product_name}}</td>
 									<td class="product-price">{{i.product.product_price}} Rs</td>
